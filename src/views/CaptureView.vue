@@ -1,12 +1,22 @@
 <template>
     <main class="capture-container">
-        <h1 class="capture-title">Pokémon Catcher</h1>
+        <GameTitle size="3rem" />
         <div class="capture-content">
             <p>Welcome to the Pokémon catching adventure!</p>
             <!-- Capture view content will go here -->
         </div>
     </main>
 </template>
+
+<script>
+import GameTitle from '../components/GameTitle.vue';
+
+export default {
+    components: {
+        GameTitle
+    }
+}
+</script>
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Jersey+20:wght@400&display=swap');
@@ -24,19 +34,6 @@
     align-items: center;
 }
 
-.capture-title {
-    font-size: 3rem;
-    font-weight: 900;
-    color: #ffde00;
-    margin-bottom: 2rem;
-    text-shadow: 
-        -3px -3px 0 #3b4cca,
-        3px -3px 0 #3b4cca,
-        -3px 3px 0 #3b4cca,
-        3px 3px 0 #3b4cca,
-        0 0 10px rgba(59, 76, 202, 0.6);
-    letter-spacing: 2px;
-}
 
 .capture-content {
     background: rgba(255, 255, 255, 0.9);

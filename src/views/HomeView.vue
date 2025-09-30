@@ -1,5 +1,10 @@
 <script>
+import GameTitle from '../components/GameTitle.vue';
+
 export default {
+    components: {
+        GameTitle
+    },
     data() {
         return {
             trainerName: '',
@@ -34,7 +39,7 @@ export default {
     <main class="main-container">
         <div class="pokeball-background">
             <div class="pokeball-line"></div>
-            <h1 class="title" :class="{ 'title-animated': isAnimating }">Pokémon Catcher</h1>
+            <GameTitle :isAnimating="isAnimating" />
     
             <form id="form-registration" class="form-container">
                 <input 
@@ -142,28 +147,6 @@ export default {
     z-index: 3;
 }
 
-.title {
-    font-size: 5.5rem;
-    font-weight: 900;
-    color: #ffde00;
-    margin-bottom: 2rem;
-    text-shadow: 
-        -5px -5px 0 #3b4cca,
-        5px -5px 0 #3b4cca,
-        -5px 5px 0 #3b4cca,
-        5px 5px 0 #3b4cca,
-        0 0 10px rgba(59, 76, 202, 0.6);
-    position: relative;
-    z-index: 4;
-    letter-spacing: 2px;
-    transition: all 1s ease-in-out;
-}
-
-.title-animated {
-    font-size: 3rem;
-    margin-bottom: 0.5rem;
-    transform: translateY(-355px);
-}
 
 .form-container {
     display: flex;
@@ -265,8 +248,5 @@ export default {
             inset 0 2px 4px rgba(0, 0, 0, 0.2);
     }
     
-    .title {
-        font-size: 2.5rem;
-    }
 }
 </style>
