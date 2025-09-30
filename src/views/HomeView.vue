@@ -1,8 +1,30 @@
 <script>
 export default {
+    data() {
+        return {
+            trainerName: '',
+            isAnimating: false,
+            validationError: ''
+        }
+    },
     methods: {
         startGame() {
-            this.$router.push('/capture');
+            // Validate input
+            if (!this.trainerName.trim()) {
+                this.validationError = 'Please enter your trainer name';
+                return;
+            }
+            
+            // Clear any previous validation error
+            this.validationError = '';
+            
+            // Start animation
+            this.isAnimating = true;
+            
+            // Navigate after animation completes
+            setTimeout(() => {
+                this.$router.push('/capture');
+            }, 1000); // 1 second animation duration
         }
     }
 };
@@ -12,10 +34,20 @@ export default {
     <main class="main-container">
         <div class="pokeball-background">
             <div class="pokeball-line"></div>
-            <h1 class="title">Pokémon Catcher</h1>
+            <h1 class="title" :class="{ 'title-animated': isAnimating }">Pokémon Catcher</h1>
     
             <form id="form-registration" class="form-container">
-                <input type="text" name="trainer-name" id="trainer-name" class="trainer-input" placeholder="Enter your trainer name" />
+                <input 
+                    type="text" 
+                    name="trainer-name" 
+                    id="trainer-name" 
+                    class="trainer-input" 
+                    placeholder="Enter your trainer name"
+                    v-model="trainerName"
+                    :class="{ 'error': validationError }"
+                />
+                
+                <div v-if="validationError" class="error-message">{{ validationError }}</div>
     
                 <button @click.prevent="startGame" class="start-button">Start</button>
             </form>
@@ -124,6 +156,13 @@ export default {
     position: relative;
     z-index: 4;
     letter-spacing: 2px;
+    transition: all 1s ease-in-out;
+}
+
+.title-animated {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    transform: translateY(-355px);
 }
 
 .form-container {
@@ -150,6 +189,19 @@ export default {
 .trainer-input:focus {
     border-color: #2980b9;
     box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.trainer-input.error {
+    border-color: #e74c3c;
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 0.9rem;
+    margin-top: -0.5rem;
+    text-align: center;
+    font-weight: bold;
 }
 
 .start-button {
