@@ -1,5 +1,6 @@
 <script>
 import GameTitle from '../components/GameTitle.vue';
+import { useTrainerStore } from '../stores/trainer.js';
 
 export default {
     components: {
@@ -7,21 +8,37 @@ export default {
     },
     data() {
         return {
-            trainerName: '',
             isAnimating: false,
             validationError: ''
         }
     },
+    setup() {
+        const trainerStore = useTrainerStore();
+        return { trainerStore };
+    },
+    computed: {
+        trainerName: {
+            get() {
+                return this.trainerStore.name;
+            },
+            set(value) {
+                this.trainerStore.setTrainerName(value);
+            }
+        }
+    },
     methods: {
         startGame() {
-            // Validate input
-            if (!this.trainerName.trim()) {
+            // Validate input using store
+            if (!this.trainerStore.hasName) {
                 this.validationError = 'Please enter your trainer name';
                 return;
             }
             
             // Clear any previous validation error
             this.validationError = '';
+            
+            // Start game in store
+            this.trainerStore.startGame();
             
             // Start animation
             this.isAnimating = true;

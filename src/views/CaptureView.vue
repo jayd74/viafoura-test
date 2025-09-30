@@ -2,7 +2,7 @@
     <main class="capture-container">
         <GameTitle size="3rem" />
         <div class="capture-content">
-            <p>Welcome to the Pokémon catching adventure!</p>
+            <p>Welcome to the Pokémon catching adventure, <span class="trainer-name">{{ trainerStore.displayName }}</span>!</p>
             <!-- Capture view content will go here -->
         </div>
     </main>
@@ -10,10 +10,15 @@
 
 <script>
 import GameTitle from '../components/GameTitle.vue';
+import { useTrainerStore } from '../stores/trainer.js';
 
 export default {
     components: {
         GameTitle
+    },
+    setup() {
+        const trainerStore = useTrainerStore();
+        return { trainerStore };
     }
 }
 </script>
@@ -49,5 +54,12 @@ export default {
     font-size: 1.2rem;
     color: #2c3e50;
     margin: 0;
+}
+
+.trainer-name {
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: red;
+    
 }
 </style>
