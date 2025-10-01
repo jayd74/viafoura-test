@@ -1,10 +1,19 @@
 <script>
 import { useTrainerStore } from '../stores/trainer.js';
+import PokedexModal from './PokedexModal.vue';
 
 export default {
+    components: {
+        PokedexModal
+    },
     setup() {
         const trainerStore = useTrainerStore();
         return { trainerStore };
+    },
+    data() {
+        return {
+            showPokedexModal: false
+        };
     },
     methods: {
         async findPokemon() {
@@ -23,8 +32,12 @@ export default {
             this.trainerStore.throwPokeball();
         },
         
-        showCollectionView() {
-            this.$router.push('/collection');
+        showPokedex() {
+            this.showPokedexModal = true;
+        },
+        
+        closePokedex() {
+            this.showPokedexModal = false;
         },
         
         quitGame() {
@@ -61,11 +74,17 @@ export default {
                 Throw
             </button>
 
-            <button name="btn-collection" @click.prevent="showCollectionView">
+            <button name="btn-collection" @click.prevent="showPokedex">
                 Pokedex ({{ trainerStore.pokedexCount }})
             </button>
 
             <button name="btn-quit" @click.prevent="quitGame">Quit</button>
         </fieldset>
     </form>
+    
+    <!-- Pokedex Modal -->
+    <PokedexModal 
+        :is-open="showPokedexModal" 
+        @close="closePokedex" 
+    />
 </template>
