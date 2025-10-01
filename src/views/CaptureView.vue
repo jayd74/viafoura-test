@@ -3,18 +3,37 @@
         <GameTitle size="3rem" />
         <div class="capture-content">
             <p>Welcome to the Pokémon catching adventure, <span class="trainer-name">{{ trainerStore.displayName }}</span>!</p>
-            <!-- Capture view content will go here -->
+        </div>
+        
+        <div class="game-area">
+            <div class="viewfinder-section">
+                <ViewFinder />
+            </div>
+            
+            <div class="controls-section">
+                <GameControls />
+            </div>
+        </div>
+        
+        <div class="event-log-container">
+            <EventLog />
         </div>
     </main>
 </template>
 
 <script>
 import GameTitle from '../components/GameTitle.vue';
+import EventLog from '../components/EventLog.vue';
+import ViewFinder from '../components/ViewFinder.vue';
+import GameControls from '../components/GameControls.vue';
 import { useTrainerStore } from '../stores/trainer.js';
 
 export default {
     components: {
-        GameTitle
+        GameTitle,
+        EventLog,
+        ViewFinder,
+        GameControls
     },
     setup() {
         const trainerStore = useTrainerStore();
@@ -60,6 +79,40 @@ export default {
     font-size: 1.2rem;
     font-weight: 900;
     color: red;
+}
+
+.game-area {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+    max-width: 800px;
+    margin-top: 2rem;
+}
+
+.viewfinder-section {
+    width: 100%;
+}
+
+.controls-section {
+    width: 100%;
+}
+
+.event-log-container {
+    margin-top: 2rem;
+    width: 100%;
+    max-width: 600px;
+}
+
+/* Responsive layout */
+@media (min-width: 768px) {    
+    .viewfinder-section {
+        flex: 2;
+    }
     
+    .controls-section {
+        flex: 1;
+        min-width: 300px;
+    }
 }
 </style>
