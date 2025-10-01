@@ -115,6 +115,14 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- Empty State -->
+                    <div v-else class="empty-collection">
+                        <div class="empty-message">
+                            <h3>No Pokémon Caught Yet</h3>
+                            <p>Start your adventure and catch some Pokémon to see them here!</p>
+                        </div>
+                    </div>
                 </div>
                 
                 <!-- Pokemon Details View -->
@@ -260,6 +268,7 @@ export default {
         availableTypes() {
             // Get unique types from caught Pokemon only
             const types = new Set();
+            
             this.caughtPokemon.forEach(pokemon => {
                 pokemon.types.forEach(type => {
                     types.add(type.type.name);
@@ -275,12 +284,17 @@ export default {
     watch: {
         isOpen(newVal) {
             if (newVal) {
+                // Load Pokemon list when modal opens
                 this.loadPokemonList();
+            } else {
+                // Reset state when modal closes
+                this.showPokemonDetails = false;
+                this.selectedPokemon = null;
             }
         },
         caughtPokemon: {
             handler() {
-                this.applySortingAndFiltering();
+                this.loadPokemonList();
             },
             deep: true
         }
@@ -398,22 +412,17 @@ export default {
             this.filteredPokemon = pokemon;
         },
         
-        async loadPokemonList() {
-            // Only load Pokemon that have been caught
-            this.caughtPokemonData = [];
-            
-            // Get unique Pokemon IDs from caught Pokemon
-            const uniqueCaughtIds = [...new Set(this.caughtPokemon.map(p => p.id))];
-            
-            for (const pokemonId of uniqueCaughtIds) {
-                try {
-                    const { PokemonApiService } = await import('../services/pokemonApi.js');
-                    const pokemon = await PokemonApiService.getPokemonById(pokemonId);
-                    this.caughtPokemonData.push(pokemon);
-                } catch (error) {
-                    console.error(`Error loading Pokemon ${pokemonId}:`, error);
+        loadPokemonList() {
+            // Since caughtPokemon now contains full Pokemon data, we can use it directly
+            // Get unique Pokemon from caught Pokemon (remove duplicates by ID)
+            const uniquePokemonMap = new Map();
+            this.caughtPokemon.forEach(pokemon => {
+                if (!uniquePokemonMap.has(pokemon.id)) {
+                    uniquePokemonMap.set(pokemon.id, pokemon);
                 }
-            }
+            });
+            
+            this.caughtPokemonData = Array.from(uniquePokemonMap.values());
             this.applySortingAndFiltering();
         }
     }
@@ -646,6 +655,46 @@ export default {
 
 .pokemon-list {
     padding: 1rem;
+}
+
+.loading-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 2rem;
+}
+
+.loading-message {
+    text-align: center;
+    color: #6b7280;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #e5e7eb;
+    border-top: 4px solid #dc2626;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-message h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.5rem;
+    color: #dc2626;
+}
+
+.loading-message p {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #6b7280;
 }
 
 .empty-collection {

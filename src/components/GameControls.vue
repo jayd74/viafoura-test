@@ -1,10 +1,12 @@
 <script>
 import { useTrainerStore } from '../stores/trainer.js';
 import PokedexModal from './PokedexModal.vue';
+import QuitConfirmationModal from './QuitConfirmationModal.vue';
 
 export default {
     components: {
-        PokedexModal
+        PokedexModal,
+        QuitConfirmationModal
     },
     setup() {
         const trainerStore = useTrainerStore();
@@ -12,7 +14,8 @@ export default {
     },
     data() {
         return {
-            showPokedexModal: false
+            showPokedexModal: false,
+            showQuitModal: false
         };
     },
     methods: {
@@ -40,8 +43,12 @@ export default {
             this.showPokedexModal = false;
         },
         
-        quitGame() {
-            this.$router.push('/');
+        showQuitConfirmation() {
+            this.showQuitModal = true;
+        },
+        
+        closeQuitModal() {
+            this.showQuitModal = false;
         }
     }
 };
@@ -78,7 +85,7 @@ export default {
                 Pokedex ({{ trainerStore.pokedexCount }})
             </button>
 
-            <button name="btn-quit" @click.prevent="quitGame">Quit</button>
+            <button name="btn-quit" @click.prevent="showQuitConfirmation">Quit</button>
         </fieldset>
     </form>
     
@@ -86,6 +93,12 @@ export default {
     <PokedexModal 
         :is-open="showPokedexModal" 
         @close="closePokedex" 
+    />
+    
+    <!-- Quit Confirmation Modal -->
+    <QuitConfirmationModal 
+        :is-open="showQuitModal" 
+        @close="closeQuitModal" 
     />
 </template>
 

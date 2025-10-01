@@ -21,8 +21,12 @@ export default {
             get() {
                 return this.trainerStore.name;
             },
-            set(value) {
+            async set(value) {
                 this.trainerStore.setTrainerName(value);
+                // Try to load progress for this trainer name
+                if (value.trim()) {
+                    await this.trainerStore.loadProgress(value.trim());
+                }
             }
         }
     },
@@ -184,6 +188,7 @@ export default {
     min-width: 250px;
     background: rgba(255, 255, 255, 0.9);
     backdrop-filter: blur(10px);
+    text-align: center;
 }
 
 .trainer-input:focus {

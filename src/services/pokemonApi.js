@@ -2,7 +2,7 @@
 const POKEMON_API_BASE = 'https://pokeapi.co/api/v2';
 
 // Pokémon IDs (1-1025)
-const ALL_POKEMON_IDS = Array.from({ length: 1025 }, (_, i) => i + 1);
+const ALL_POKEMON_IDS = Array.from({ length: 10 }, (_, i) => i + 1);
 
 export class PokemonApiService {
     /**
