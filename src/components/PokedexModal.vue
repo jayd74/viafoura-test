@@ -115,12 +115,6 @@
                             </div>
                         </div>
                     </div>
-                    <div v-else class="empty-collection">
-                        <div class="empty-message">
-                            <h3>No Pokémon caught yet!</h3>
-                            <p>Go back to the game and start catching Pokémon to see them here.</p>
-                        </div>
-                    </div>
                 </div>
                 
                 <!-- Pokemon Details View -->
@@ -908,13 +902,6 @@ export default {
     width: 120px;
     height: 120px;
     object-fit: contain;
-}
-
-.pokemon-types {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    justify-content: center;
 }
 
 .basic-stats {

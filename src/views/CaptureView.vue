@@ -66,7 +66,6 @@ export default {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
     text-align: center;
-    max-width: 600px;
 }
 
 .capture-content p {
@@ -86,7 +85,6 @@ export default {
     flex-direction: column;
     gap: 2rem;
     width: 100%;
-    max-width: 800px;
     margin-top: 2rem;
 }
 
@@ -101,7 +99,6 @@ export default {
 .event-log-container {
     margin-top: 2rem;
     width: 100%;
-    max-width: 600px;
 }
 
 /* Responsive layout */

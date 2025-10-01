@@ -1,5 +1,11 @@
 <template>
     <div class="viewfinder">
+        <!-- Pokemon name section in top right -->
+        <div v-if="trainerStore.hasActiveEncounter && trainerStore.throwOutcome !== 'success' && trainerStore.throwOutcome !== 'loading'" class="pokemon-name-section">
+            <div class="pokemon-id">#{{ trainerStore.currentEncounter.id.toString().padStart(3, '0') }}</div>
+            <h3 class="pokemon-name">{{ formatPokemonName(trainerStore.currentEncounter.name) }}</h3>
+        </div>
+        
         <div v-if="trainerStore.hasActiveEncounter" class="pokemon-encounter" :class="trainerStore.animationState">
             <!-- Show Pokémon only when not caught and not loading -->
             <div v-if="trainerStore.throwOutcome !== 'success' && trainerStore.throwOutcome !== 'loading'">
@@ -8,10 +14,6 @@
                     :alt="trainerStore.currentEncounter.name"
                     class="pokemon-image"
                 />
-                <div class="pokemon-name-section">
-                    <h3 class="pokemon-name">{{ formatPokemonName(trainerStore.currentEncounter.name) }}</h3>
-                    <div class="pokemon-id">#{{ trainerStore.currentEncounter.id.toString().padStart(3, '0') }}</div>
-                </div>
             </div>
             
             <!-- Loading state - show only background -->
@@ -26,9 +28,6 @@
             <!-- Success outcome -->
             <div v-if="trainerStore.throwOutcome === 'success'" class="success-outcome">
                 <img src="../assets/pokeball.png" alt="Pokeball" class="pokeball-caught" />
-                <div class="success-message">
-                    {{ formatPokemonName(trainerStore.currentEncounter.name) }} is successfully caught!
-                </div>
             </div>
             
             <!-- Failure outcome -->
@@ -45,9 +44,14 @@
                 </div>
             </div>
         </div>
-        <div v-else class="no-encounter">
-            <p>No Pokémon encountered yet.</p>
-            <p>Click "Find" to search for a wild Pokémon!</p>
+        <!-- Event Caption -->
+        <div v-if="trainerStore.recentEvents.length > 0" class="event-caption">
+            <div class="event-message">{{ trainerStore.recentEvents[trainerStore.recentEvents.length - 1].message }}</div>
+        </div>
+        
+        <!-- No encounter message as event caption -->
+        <div v-else-if="!trainerStore.hasActiveEncounter" class="event-caption">
+            <div class="event-message">No Pokémon encountered yet. Click "Find" to search for a wild Pokémon!</div>
         </div>
     </div>
 </template>
@@ -95,8 +99,10 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 2rem;
     width: 100%;
+    height: 100%;
 }
 
 .pokemon-encounter.run-away {
@@ -217,24 +223,28 @@ export default {
 }
 
 .pokemon-name-section {
+    position: absolute;
+    top: 20px;
+    right: 20px;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
     text-align: center;
     background: #ffffff;
-    border: 5px solid #3b4cca;
+    border: 5px solid #000000;
     border-radius: 8px;
     padding: 0.5rem;
     color: #000000;
+    min-width: 200px;
+    z-index: 10;
 }
 
 .pokemon-name {
-    margin: 0 0 0.5rem 0;
-    color: #3b4cca;
-    font-size: 2rem;
-    text-shadow: 2px 2px 0 #ffde00;
-    font-weight: bold;
     margin: 0;
+    color: #000000;
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
 .pokemon-id {
@@ -243,20 +253,6 @@ export default {
     font-weight: bold;
 }
 
-.no-encounter {
-    text-align: center;
-    color: #ffde00;
-}
-
-.no-encounter p {
-    margin: 0.5rem 0;
-    font-size: 1.1rem;
-}
-
-.no-encounter p:first-child {
-    font-size: 1.3rem;
-    font-weight: bold;
-}
 
 /* Responsive design */
 @media (max-width: 768px) {
@@ -411,6 +407,54 @@ export default {
     }
     100% {
         transform: rotate(360deg);
+    }
+}
+
+/* Event Caption Styles */
+.event-caption {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    border: 3px solid black;
+    border-radius: 8px;
+    padding: 12px 20px;
+    z-index: 10;
+    font-family: 'Courier New', monospace;
+    max-width: 80%;
+    text-align: center;
+    animation: fadeInSlide 0.5s ease-out;
+}
+
+.event-message {
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0;
+}
+
+@keyframes fadeInSlide {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* Responsive adjustments for event caption */
+@media (max-width: 768px) {
+    .event-caption {
+        bottom: 10px;
+        padding: 10px 16px;
+        max-width: 90%;
+    }
+    
+    .event-message {
+        font-size: 12px;
     }
 }
 </style>
