@@ -20,7 +20,7 @@ export const useTrainerStore = defineStore('trainer', {
     getters: {
         hasName: (state) => state.name.trim().length > 0,
         displayName: (state) => state.name.trim() || 'Trainer',
-        recentEvents: (state) => state.eventLog.slice(-10), // Show last 10 events
+        recentEvents: (state) => state.eventLog.slice(-10).reverse(), // Show last 10 events, newest first
         hasActiveEncounter: (state) => state.currentEncounter !== null,
         pokedexCount: (state) => {
             const uniquePokemon = new Set();
@@ -40,6 +40,9 @@ export const useTrainerStore = defineStore('trainer', {
         startGame() {
             if (this.hasName) {
                 this.isGameStarted = true;
+                
+                // Clear event log for fresh session
+                this.clearEventLog();
                 
                 // Reset encounter state to ensure ViewFinder starts clean
                 this.currentEncounter = null;
@@ -341,6 +344,10 @@ export const useTrainerStore = defineStore('trainer', {
                 console.error('Error clearing progress:', error);
                 this.addEvent('Failed to clear progress');
             }
+        },
+        
+        clearEventLog() {
+            this.eventLog = [];
         }
     }
 });

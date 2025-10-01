@@ -48,7 +48,6 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Jersey+20:wght@400&display=swap');
 
 .encounter-stats {
     background: #ffffff;
@@ -56,7 +55,7 @@ export default {
     border-radius: 8px;
     padding: 1.5rem;
     color: #000000;
-    font-family: 'Jersey 20', monospace;
+    font-family: 'Courier New', monospace;
     width: 100%;
     max-width: 400px;
 }

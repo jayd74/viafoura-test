@@ -39,6 +39,9 @@ export default {
             // Save progress to local storage
             this.trainerStore.saveProgress();
             
+            // Clear event log for fresh session
+            this.trainerStore.clearEventLog();
+            
             // Navigate to home screen
             this.$router.push('/');
         }

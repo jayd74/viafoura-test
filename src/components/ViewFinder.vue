@@ -74,7 +74,6 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Jersey+20:wght@400&display=swap');
 
 .viewfinder {
     background-image: url('../assets/background.png');
@@ -90,7 +89,7 @@ export default {
     align-items: center;
     justify-content: center;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    font-family: 'Jersey 20', monospace;
+    font-family: 'Courier New', monospace;
     position: relative;
     overflow: hidden;
 }

@@ -59,8 +59,8 @@ export default {
 <template>
     <main class="main-container">
         <div class="pokeball-background">
-            <div class="pokeball-line"></div>
-            <GameTitle :isAnimating="isAnimating" />
+            <img src="../assets/pokeball.png" alt="Pokeball" class="pokeball-image" />
+            <GameTitle :isAnimating="isAnimating" size="4rem" />
     
             <form id="form-registration" class="form-container">
                 <input 
@@ -82,10 +82,9 @@ export default {
 </template>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Jersey+20:wght@400&display=swap');
 
 * {
-    font-family: 'Jersey 20', monospace;
+    font-family: 'Courier New', monospace;
 }
 .main-container {
     background: #3498db;
@@ -102,70 +101,16 @@ export default {
     position: relative;
 }
 
-/* Poké Ball Background */
-.pokeball-background::before {
-    content: '';
+/* Pokeball Image */
+.pokeball-image {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    height: 400px;
-    border-radius: 50%;
-    background: linear-gradient(to bottom, #e74c3c 0%, #e74c3c 50%, #ffffff 50%, #ffffff 100%);
-    border: 8px solid #2c3e50;
-    box-shadow: 
-        0 0 0 4px #34495e,
-        0 10px 30px rgba(0, 0, 0, 0.3),
-        inset 0 0 0 2px #2c3e50;
+    transform: translate(-50%, -50%) rotate(20deg);
+    width: 500px;
+    height: 500px;
     z-index: 1;
-}
-
-/* Black line separating red and white halves */
-.pokeball-line {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    height: 8px;
-    background: #2c3e50;
-    z-index: 2;
-    border-radius: 4px;
-    mask: 
-        linear-gradient(to right, 
-            black 0%, 
-            black calc(50% - 30px), 
-            transparent calc(50% - 30px), 
-            transparent calc(50% + 30px), 
-            black calc(50% + 30px), 
-            black 100%);
-    -webkit-mask: 
-        linear-gradient(to right, 
-            black 0%, 
-            black calc(50% - 30px), 
-            transparent calc(50% - 30px), 
-            transparent calc(50% + 30px), 
-            black calc(50% + 30px), 
-            black 100%);
-}
-
-/* Center Button */
-.pokeball-background::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
-    border: 6px solid #2c3e50;
-    box-shadow: 
-        0 0 0 3px #34495e,
-        inset 0 2px 4px rgba(0, 0, 0, 0.2);
-    z-index: 3;
+    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
 }
 
 
@@ -234,41 +179,9 @@ export default {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .pokeball-background::before {
-        width: 300px;
-        height: 300px;
+    .pokeball-image {
+        width: 400px;
+        height: 400px;
     }
-    
-    .pokeball-line {
-        width: 300px;
-        height: 6px;
-        border-radius: 3px;
-        mask: 
-            linear-gradient(to right, 
-                black 0%, 
-                black calc(50% - 22.5px), 
-                transparent calc(50% - 22.5px), 
-                transparent calc(50% + 22.5px), 
-                black calc(50% + 22.5px), 
-                black 100%);
-        -webkit-mask: 
-            linear-gradient(to right, 
-                black 0%, 
-                black calc(50% - 22.5px), 
-                transparent calc(50% - 22.5px), 
-                transparent calc(50% + 22.5px), 
-                black calc(50% + 22.5px), 
-                black 100%);
-    }
-    
-    .pokeball-background::after {
-        width: 45px;
-        height: 45px;
-        border: 4px solid #2c3e50;
-        box-shadow: 
-            0 0 0 2px #34495e,
-            inset 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
-    
 }
 </style>

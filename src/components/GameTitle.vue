@@ -21,10 +21,9 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Jersey+20:wght@400&display=swap');
 
 .game-title {
-    font-family: 'Jersey 20', monospace;
+    font-family: 'Courier New', monospace;
     font-size: var(--title-size, 5.5rem);
     font-weight: 900;
     color: #ffde00;

@@ -3,7 +3,7 @@
         <div class="pokedex-modal" @click.stop>
             <!-- Header -->
             <div class="pokedex-header">
-                <h2>Kanto Pokédex</h2>
+                <h2>Pokédex</h2>
             </div>
             
             <!-- Controls Section -->
@@ -430,7 +430,6 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Jersey+20:wght@400&display=swap');
 
 .modal-overlay {
     position: fixed;
@@ -443,7 +442,7 @@ export default {
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    font-family: 'Jersey 20', monospace;
+    font-family: 'Courier New', monospace;
 }
 
 .pokedex-modal {
@@ -518,7 +517,7 @@ export default {
     border: 2px solid #dc2626;
     border-radius: 4px;
     padding: 0.5rem 1rem;
-    font-family: 'Jersey 20', monospace;
+    font-family: 'Courier New', monospace;
     font-size: 0.9rem;
     cursor: pointer;
     display: flex;
@@ -613,7 +612,7 @@ export default {
     border: none;
     padding: 0.5rem;
     text-align: left;
-    font-family: 'Jersey 20', monospace;
+    font-family: 'Courier New', monospace;
     font-size: 0.9rem;
     cursor: pointer;
     border-radius: 4px;
@@ -861,7 +860,7 @@ export default {
     border: none;
     padding: 0.75rem 2rem;
     border-radius: 8px;
-    font-family: 'Jersey 20', monospace;
+    font-family: 'Courier New', monospace;
     font-size: 1.1rem;
     font-weight: bold;
     cursor: pointer;
@@ -894,7 +893,7 @@ export default {
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 6px;
-    font-family: 'Jersey 20', monospace;
+    font-family: 'Courier New', monospace;
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;

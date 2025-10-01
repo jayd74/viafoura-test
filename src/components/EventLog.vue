@@ -2,7 +2,6 @@
     <div class="event-log">
         <div class="event-log-header">
             <h3>Event Log</h3>
-            <span class="trainer-greeting">Happy hunting, {{ trainerStore.displayName }}!</span>
         </div>
         <div class="event-list">
             <div 
@@ -34,7 +33,6 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Jersey+20:wght@400&display=swap');
 
 .event-log {
     background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
@@ -42,7 +40,7 @@ export default {
     border-radius: 8px;
     padding: 1rem;
     color: #000000;
-    font-family: 'Jersey 20', monospace;
+    font-family: 'Courier New', monospace;
     max-height: 300px;
     overflow-y: auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -59,15 +57,8 @@ export default {
 
 .event-log-header h3 {
     margin: 0;
-    color: #ffde00;
+    color: #3b4cca;
     font-size: 1.2rem;
-    text-shadow: 2px 2px 0 #3b4cca;
-}
-
-.trainer-greeting {
-    color: #ffde00;
-    font-size: 0.9rem;
-    font-weight: bold;
 }
 
 .event-list {
@@ -78,7 +69,7 @@ export default {
 
 .event-item {
     display: flex;
-    gap: 0.5rem;
+    gap: 2rem;
     padding: 0.25rem 0;
     border-radius: 4px;
     transition: background-color 0.2s ease;

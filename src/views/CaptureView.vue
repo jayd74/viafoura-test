@@ -49,10 +49,9 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Jersey+20:wght@400&display=swap');
 
 * {
-    font-family: 'Jersey 20', monospace;
+    font-family: 'Courier New', monospace;
 }
 
 .capture-container {
