@@ -22,7 +22,13 @@ export const useTrainerStore = defineStore('trainer', {
         displayName: (state) => state.name.trim() || 'Trainer',
         recentEvents: (state) => state.eventLog.slice(-10), // Show last 10 events
         hasActiveEncounter: (state) => state.currentEncounter !== null,
-        pokedexCount: (state) => state.caughtPokemon.length
+        pokedexCount: (state) => {
+            const uniquePokemon = new Set();
+            state.caughtPokemon.forEach(pokemon => {
+                uniquePokemon.add(pokemon.id);
+            });
+            return uniquePokemon.size;
+        }
     },
     
     actions: {
