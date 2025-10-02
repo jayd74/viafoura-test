@@ -131,5 +131,7 @@ export default {
     .label {
         min-width: auto;
     }
+
+   
 }
 </style>

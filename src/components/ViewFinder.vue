@@ -421,7 +421,7 @@ export default {
     padding: 12px 20px;
     z-index: 10;
     font-family: 'Courier New', monospace;
-    max-width: 80%;
+    width: 80%;
     text-align: center;
     animation: fadeInSlide 0.5s ease-out;
 }

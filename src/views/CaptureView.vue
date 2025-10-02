@@ -1,22 +1,24 @@
 <template>
-    <main class="capture-container">
-        <GameTitle size="3rem" />
-        <div class="capture-content">
-            <p>Welcome to the Pokémon catching adventure, <span class="trainer-name">{{ trainerStore.displayName }}</span>!</p>
-        </div>
-        
-        <div class="game-area">
-            <div class="viewfinder-section">
-                <ViewFinder />
+    <main class="capture-view">
+        <div class="capture-container">
+            <GameTitle size="3rem" />
+            <div class="capture-content">
+                <p>Welcome to the Pokémon catching adventure, <span class="trainer-name">{{ trainerStore.displayName }}</span>!</p>
             </div>
             
-            <div class="controls-section">
-                <GameControls />
+            <div class="game-area">
+                <div class="viewfinder-section">
+                    <ViewFinder />
+                </div>
+                
+                <div class="controls-section">
+                    <GameControls />
+                </div>
             </div>
-        </div>
-        
-        <div class="event-log-container">
-            <EventLog />
+            
+            <div class="event-log-container">
+                <EventLog />
+            </div>
         </div>
     </main>
 </template>
@@ -54,13 +56,18 @@ export default {
     font-family: 'Courier New', monospace;
 }
 
+.capture-view {
+    background: #3498db;
+}
+
 .capture-container {
     min-height: 100vh;
-    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
     padding: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-width: 80%;
+    margin: 0 auto;
 }
 
 

@@ -1127,12 +1127,13 @@ export default {
     }
     
     .stat-item {
-        flex-direction: column;
         gap: 0.5rem;
         text-align: center;
     }
     
     .stat-name {
+        text-align: left;
+        flex-basis: 20%;
         min-width: auto;
     }
     
